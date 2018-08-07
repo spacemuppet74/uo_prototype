@@ -1,15 +1,39 @@
+body,
 html,
-body {
+#s4-bodyContainer,
+#contentRow,
+#contentBox,
+#DeltaPlaceHolderMain,
+div[data-name="WebPartZone"],
+div[data-name="WebPartZone"] > div,
+.ms-webpart-zone.ms-fullWidth,
+.s4-wpcell-plain.ms-webpartzone-cell.ms-webpart-cell-vertical.ms-fullWidth,
+.ms-webpart-chrome.ms-webpart-chrome-vertical.ms-webpart-chrome-fullWidth,
+.ms-WPBody.noindex,
+.ms-rtestate-field,
+#root {
   height: 100%;
-  padding: 0;
-  margin: 0;
 }
 
 #root {
-  height: 100%;
-  background: rgb(9, 21, 190);
+  margin: 0;
+  max-width: 1250px;
 }
 
-#root h1 {
-  margin: 0;
+#pageTitle {
+  display: none;
+}
+
+.clearFix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.button {
+  float: inherit;
+}
+
+.nzbs-people-picker div.input {
+  width: inherit;
 }
