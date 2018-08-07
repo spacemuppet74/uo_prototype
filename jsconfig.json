@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "experimentalDecorators": true,
+    "baseUrl": "src",
+    "paths": {
+      "components/*": ["./components/*"],
+      "models/*": ["./models/*"],
+      "store/*": ["./redux/*"],
+      "services/*": ["./services/*"],
+      "utils/*": ["./utils/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
