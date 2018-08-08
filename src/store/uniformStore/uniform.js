@@ -11,6 +11,8 @@ export default class Uniform {
   @observable genders = "";
   @observable categories = "";
   @observable maxOrderAmount = 4;
+  @observable selectedSize = null;
+  @observable selectedQuantity = null;
 
   constructor({
     Id,
@@ -33,4 +35,39 @@ export default class Uniform {
     this.genders = genderId;
     this.categories = categoryId;
   }
+
+  @computed
+  get availableSizes() {
+    return this.sizes.map(size => ({ text: size.Title, value: size.Id }));
+  }
+
+  @computed
+  get availableQuantites() {
+    return [...Array(this.maxOrderAmount).keys()].map(amount => ({
+      text: amount,
+      value: amount
+    }));
+  }
+
+  @computed
+  get allowSubmit() {
+    return !this.selectedQuantity || !this.selectedSize;
+  }
+
+  @action
+  setSelectedSize = size => {
+    this.selectedSize = size;
+  };
+
+  @action
+  setSelectedQuantity = amount => {
+    this.selectedQuantity = amount;
+    console.log(this);
+  };
+
+  @action
+  resetSizeAndQuantity = () => {
+    this.selectedQuantity = null;
+    this.selectedSize = null;
+  };
 }

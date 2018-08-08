@@ -15,7 +15,7 @@ const UniformCard = ({ uniform, match }) => {
           color="blue"
           fluid
           as={Link}
-          to={`${match.url}/${uniform.uniformId}`}
+          to={`${match.url}/${uniform.id}`}
         >
           View
         </Button>

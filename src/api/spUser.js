@@ -54,6 +54,10 @@ class SpUserApi extends SpBaseApiConfig {
         }
       );
   }
+
+  fetchUserByLogin(login) {
+    return sp.web.ensureUser(login).then(resp => resp.data, error => error);
+  }
 }
 
 const spUserApi = new SpUserApi();

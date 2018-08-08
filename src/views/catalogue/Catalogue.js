@@ -1,54 +1,42 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import {
-  Card,
-  Grid,
-  Message,
-  Segment,
-  Dimmer,
-  Loader
-} from "semantic-ui-react";
+import { Route, Switch } from "react-router-dom";
+import { Grid, Menu, Container } from "semantic-ui-react";
 
-import UniformCard from "./UnfiormCard/UniformCard";
+import Uniforms from "../../features/Uniforms/Uniforms";
+import UniformDetails from "../../features/Uniforms/UniformDetails/UniformDetails";
+import GenderFilters from "../../features/genderFilters/GenderFilters";
+import CategoryFilters from "../../features/categoryFilters/CategoryFilters";
 
-@inject(rootstore => ({ uniformStore: rootstore.store.uniformStore }))
+@inject(rootstore => ({ uniforms: rootstore.store.uniformStore }))
 @observer
 export default class Catalogue extends Component {
-  componentDidMount() {
-    this.props.uniformStore.setSelectedDepartment(this.props.match.params);
-    this.props.uniformStore.fetchUniforms();
-  }
   render() {
-    const { uniformStore } = this.props;
-    console.log(uniformStore.getUniforms);
     return (
-      <Grid>
-        <Grid.Column width={3}>
-          <Segment>Filters</Segment>
-        </Grid.Column>
-        <Grid.Column width={13}>
-          {uniformStore.loading && (
-            <Dimmer active inverted>
-              <Loader>Loading....</Loader>
-            </Dimmer>
+      <Switch>
+        <Route
+          exact
+          path="/catalogue/:depart/:uniformId"
+          component={UniformDetails}
+        />
+        <Route
+          exact
+          path="/catalogue/:depart"
+          render={props => (
+            <Grid>
+              <Grid.Column computer={3} tablet={2}>
+                <Menu vertical>
+                  <GenderFilters />
+                  <CategoryFilters />
+                </Menu>
+              </Grid.Column>
+              <Grid.Column computer={13} tablet={14}>
+                <Uniforms />
+              </Grid.Column>
+            </Grid>
           )}
-
-          {uniformStore.isEmpty ? (
-            <Message
-              info
-              icon="warning circle"
-              header="Nothing to Display"
-              content="Try a different category"
-            />
-          ) : (
-            <Card.Group centered itemsPerRow={5}>
-              {uniformStore.getUniforms.map(uniform => {
-                return <UniformCard uniform={uniform} key={uniform.id} />;
-              })}
-            </Card.Group>
-          )}
-        </Grid.Column>
-      </Grid>
+        />
+      </Switch>
     );
   }
 }
